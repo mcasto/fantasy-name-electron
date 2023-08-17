@@ -27,7 +27,6 @@ cd $dest
 git add -A
 git commit -m "Update"
 git push
-echo "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" | pbcopy
 sleep 2
 echo "cd $path && git pull" | pbcopy
 open "/Applications/Termius.app"
