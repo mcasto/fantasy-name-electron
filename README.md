@@ -1,7 +1,7 @@
 # Fantasy Name Generator (fantasy-name-generator)
 
 This is an Electron port based on [FantasyGen](https://github.com/alxgiraud/fantasygen). I used some libraries that allowed me to clean up the code a bit, and it's still a work in progress.
-
+s
 
 
 ## Install the dependencies
@@ -13,7 +13,7 @@ npm install
 
 ### Start the app in development mode (hot-code reloading, error reporting, etc.)
 ```bash
-quasar dev
+quasar dev -m electron
 ```
 
 

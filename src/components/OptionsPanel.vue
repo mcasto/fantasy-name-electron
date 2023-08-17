@@ -13,7 +13,7 @@
     ></q-input>
 
     <div class="text-h5 q-mt-lg q-mx-md q-mb-sm" v-if="options">
-      Options
+      Generation Type
 
       <q-input
         type="text"

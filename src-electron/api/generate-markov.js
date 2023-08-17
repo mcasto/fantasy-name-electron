@@ -11,6 +11,7 @@ async function generateMarkov(db, config) {
   const { values } = await db.findOne({ name });
 
   chain.refresh();
+  if (config.order) chain.setOrder(config.order);
   chain.addWordsToChain(values);
 
   const results = [];

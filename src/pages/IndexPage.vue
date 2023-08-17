@@ -41,6 +41,9 @@
         </q-toolbar-title>
         <q-btn round flat icon="close" @click="settingsDrawer = false"></q-btn>
       </q-toolbar>
+
+      <settings-markov v-if="tab == 'markov'"></settings-markov>
+      <settings-taverns v-if="tab == 'taverns'"></settings-taverns>
     </q-drawer>
   </q-page>
 </template>
@@ -48,8 +51,11 @@
 <script>
   import { useStore } from "stores/store";
   import { mapActions, mapWritableState } from "pinia";
+  import { startCase } from "lodash";
 
   import OptionsPanel from "components/OptionsPanel.vue";
+  import SettingsMarkov from "components/SettingsMarkov.vue";
+  import SettingsTaverns from "components/SettingsTaverns.vue";
   import TopToolbar from "components/TopToolbar.vue";
   import FantasticSpeciesPanel from "components/FantasticSpeciesPanel.vue";
   import GenericFantasyPanel from "components/GenericFantasyPanel.vue";
@@ -65,6 +71,8 @@
       GroupsPanel,
       MarkovPanel,
       OptionsPanel,
+      SettingsMarkov,
+      SettingsTaverns,
       TavernsPanel,
       TopToolbar,
     },
@@ -73,6 +81,12 @@
     }),
     computed: {
       ...mapWritableState(useStore, ["output", "settingsDrawer", "tab"]),
+    },
+    watch: {
+      tab() {
+        if (this.tab != "markov" && this.tab != "taverns")
+          this.settingsDrawer = false;
+      },
     },
     methods: {
       ...mapActions(useStore, ["getOptions"]),
