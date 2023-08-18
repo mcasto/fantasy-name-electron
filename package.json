@@ -1,6 +1,6 @@
 {
   "name": "fantasy-name-generator",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "A Quasar Electron port of fantasygen",
   "productName": "Fantasy Name Generator",
   "author": "Mike Casto <castoware@gmail.com>",
