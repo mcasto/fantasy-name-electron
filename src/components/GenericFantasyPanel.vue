@@ -1,7 +1,5 @@
 <template>
-  <q-page>
-    <output-table section="fantasyName"></output-table>
-  </q-page>
+  <output-table section="fantasyName"></output-table>
 </template>
 
 <script>

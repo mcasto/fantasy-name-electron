@@ -1,37 +1,35 @@
 <template>
-  <q-page>
-    <q-toolbar>
-      <q-toolbar-title>
-        {{ title }}
-      </q-toolbar-title>
-    </q-toolbar>
+  <q-toolbar>
+    <q-toolbar-title>
+      {{ title }}
+    </q-toolbar-title>
+  </q-toolbar>
+  <q-input
+    type="number"
+    label="Number to Generate"
+    class="q-mx-lg"
+    v-model="config[storeProp].num"
+  ></q-input>
+
+  <div class="text-h5 q-mt-lg q-mx-md q-mb-sm" v-if="options">
+    Generation Type
+
     <q-input
-      type="number"
-      label="Number to Generate"
-      class="q-mx-lg"
-      v-model="config[storeProp].num"
+      type="text"
+      v-model="search"
+      label="Search"
+      clearable
+      class="q-mr-lg"
+      @keydown.esc="search = null"
     ></q-input>
-
-    <div class="text-h5 q-mt-lg q-mx-md q-mb-sm" v-if="options">
-      Generation Type
-
-      <q-input
-        type="text"
-        v-model="search"
-        label="Search"
-        clearable
-        class="q-mr-lg"
-        @keydown.esc="search = null"
-      ></q-input>
-    </div>
-    <div style="height: 600px; overflow-y: scroll;" v-if="options">
-      <q-list dense separator>
-        <q-item v-for="option in options" :key="option._id">
-          {{ option.title }}
-        </q-item>
-      </q-list>
-    </div>
-  </q-page>
+  </div>
+  <div style="height: 600px; overflow-y: scroll;" v-if="options">
+    <q-list dense separator>
+      <q-item v-for="option in options" :key="option._id">
+        {{ option.title }}
+      </q-item>
+    </q-list>
+  </div>
 </template>
 
 <script>

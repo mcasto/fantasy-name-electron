@@ -1,19 +1,17 @@
 <template>
-  <q-page>
-    <q-toolbar>
-      <q-space></q-space>
-      <q-btn icon="refresh" round flat @click="refresh"></q-btn>
-    </q-toolbar>
-    <q-markup-table v-if="output[section]">
-      <tbody>
-        <tr v-for="row in rows" :key="row">
-          <td v-for="(col, index) in row" :key="`${col}-${index}`">
-            {{ col }}
-          </td>
-        </tr>
-      </tbody>
-    </q-markup-table>
-  </q-page>
+  <q-toolbar>
+    <q-space></q-space>
+    <q-btn icon="refresh" round flat @click="refresh"></q-btn>
+  </q-toolbar>
+  <q-markup-table v-if="output[section]">
+    <tbody>
+      <tr v-for="row in rows" :key="row">
+        <td v-for="(col, index) in row" :key="`${col}-${index}`">
+          {{ col }}
+        </td>
+      </tr>
+    </tbody>
+  </q-markup-table>
 </template>
 
 <script>
@@ -24,7 +22,7 @@
   export default {
     props: ["section"],
     computed: {
-      ...mapState(useStore, [ "output"]),
+      ...mapState(useStore, ["output"]),
       columns() {
         return this.sectionColumns[this.section];
       },

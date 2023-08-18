@@ -1,7 +1,5 @@
 <template>
-  <q-page>
-    <output-table section="groups"></output-table>
-  </q-page>
+  <output-table section="groups"></output-table>
 </template>
 
 <script>

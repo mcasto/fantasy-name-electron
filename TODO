@@ -1,7 +1,10 @@
 ☐ Image attributions
   Image by <a href="https://pixabay.com/users/susan-lu4esm-7009216/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=8163325">Susan Cipriano</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=8163325">Pixabay</a>
 
-☐ In Options, set up the selector for different typs (only applies to Markov [Egyptian Deities, Ancient Greek Cities, ...], Fantastic Species [Male Dwarf, Female Dwarf, ...], and Grouops [Military Unit, Mystic Order, ...])
+✔ In Options, set up the selector for different typs (only applies to Markov [Egyptian Deities, Ancient Greek Cities, ...], Fantastic Species [Male Dwarf, Female Dwarf, ...], and Grouops [Military Unit, Mystic Order, ...]) @done(23-08-18 07:15)
 
-☐ In Settings, set up num, minLength, maxLength, startsWithString,endsWithString,doesContain,doesNotContain, and, for Markov, "Order"
+✔ In Settings, set up num, minLength, maxLength, startsWithString,endsWithString,doesContain,doesNotContain, and, for Markov, "Order" @done(23-08-18 08:22)
 
+☐ Tie all the minLength,maxLength,startsWith,endsWith,doesContain,doesNotContain, and order into the generation code
+
+☐ In Options, for Markov & Taverns, provide the ability to add/edit/delete the dictionaries
