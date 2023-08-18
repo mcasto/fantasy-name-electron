@@ -81,7 +81,7 @@
           return item.title;
         }
 
-        return "test";
+        return "";
       },
     },
     methods: {
