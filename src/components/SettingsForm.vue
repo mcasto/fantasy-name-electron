@@ -49,7 +49,7 @@
 
 <script>
   import { useStore } from "stores/store";
-  import { mapState } from "pinia";
+  import { mapState, mapWritableState } from "pinia";
   import { camelCase } from "lodash";
 
   export default {
@@ -64,13 +64,46 @@
     }),
     computed: {
       ...mapState(useStore, ["tab"]),
+      ...mapWritableState(useStore, ["config"]),
+    },
+    watch: {
+      tab() {
+        this.updateConfig();
+      },
     },
     methods: {
       regenerate() {
         const store = useStore();
+        if (this.tab == "markov") {
+          store.config.markov.minLength = this.strLen.min;
+          store.config.markov.maxLength = this.strLen.max;
+          store.config.markov.order = this.markovOrder;
+        }
+
+        store.config[this.tab] = {
+          ...store.config[this.tab],
+          startsWithString: this.startWith,
+          endsWithString: this.endWith,
+          doesContain: this.doesContain,
+          doesNotContain: this.doesNotContain,
+        };
+
         const actionName = camelCase(`generate ${this.tab}`);
         store[actionName]();
       },
+      updateConfig() {
+        const config = this.config[this.tab];
+        this.strLen.min = config.minLength;
+        this.strLen.max = config.maxLength;
+        this.markovOrder = config.order;
+        this.startWith = config.startsWithString;
+        this.endWith = config.endsWithString;
+        this.doesContain = config.doesContain;
+        this.doesNotContain = config.doesNotContain;
+      },
+    },
+    mounted() {
+      this.updateConfig();
     },
   };
 </script>

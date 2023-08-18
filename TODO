@@ -5,6 +5,6 @@
 
 ✔ In Settings, set up num, minLength, maxLength, startsWithString,endsWithString,doesContain,doesNotContain, and, for Markov, "Order" @done(23-08-18 08:22)
 
-☐ Tie all the minLength,maxLength,startsWith,endsWith,doesContain,doesNotContain, and order into the generation code
+✔ Tie all the minLength,maxLength,startsWith,endsWith,doesContain,doesNotContain, and order into the generation code @done(23-08-18 11:17)
 
 ☐ In Options, for Markov & Taverns, provide the ability to add/edit/delete the dictionaries

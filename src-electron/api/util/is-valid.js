@@ -10,11 +10,31 @@ export default (result, config) => {
     maxLength,
   } = config;
 
-  if (!!startsWithString && !startsWith(result, startsWithString)) return false;
-  if (!!endsWithString && endsWith(result, endsWithString)) return false;
-  if (!!doesContain && !result.contains(doesContain)) return false;
-  if (!!doesNotContain && result.contains(doesNotContain)) return false;
+  if (
+    !!startsWithString &&
+    !startsWith(result.toLowerCase(), startsWithString.toLowerCase())
+  )
+    return false;
+
+  if (
+    !!endsWithString &&
+    !endsWith(result.toLowerCase(), endsWithString.toLowerCase())
+  )
+    return false;
+
+  if (
+    !!doesContain &&
+    !result.toLowerCase().contains(doesContain.toLowerCase())
+  )
+    return false;
+  if (
+    !!doesNotContain &&
+    result.toLowerCase().contains(doesNotContain.toLowerCase())
+  )
+    return false;
+
   if (!!minLength && result.length < minLength) return false;
+
   if (!!maxLength && result.length > maxLength) return false;
 
   return true;

@@ -16,13 +16,17 @@ async function generateMarkov(db, config) {
 
   const results = [];
   let attempts = 0;
-  while (results.length < num || attempts > maxAttempts) {
+  while (results.length < num && attempts < maxAttempts) {
     attempts++;
     const result = chain.generateWord();
 
     if (!isValid(result, config)) continue;
 
     results.push(result);
+  }
+
+  if (attempts >= maxAttempts) {
+    return { error: "Timed out, try broadening your settings." };
   }
 
   return results;
