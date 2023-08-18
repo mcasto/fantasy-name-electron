@@ -33,6 +33,7 @@
     overlay
     ref="rightDrawer"
     v-model="settingsDrawer"
+    v-if="tab == 'markov' || tab == 'taverns'"
   >
     <q-toolbar class="border-bottom">
       <q-toolbar-title>

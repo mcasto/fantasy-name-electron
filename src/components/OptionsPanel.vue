@@ -25,7 +25,12 @@
   </div>
   <div style="height: 600px; overflow-y: scroll;" v-if="options">
     <q-list dense separator>
-      <q-item v-for="option in options" :key="option._id">
+      <q-item
+        clickable
+        v-for="option in options"
+        :key="option._id"
+        @click="handleGenerator(option)"
+      >
         {{ option.title }}
       </q-item>
     </q-list>
@@ -34,7 +39,7 @@
 
 <script>
   import { useStore } from "stores/store";
-  import { mapState, mapWritableState } from "pinia";
+  import { mapActions, mapState, mapWritableState } from "pinia";
   import { camelCase, startCase } from "lodash";
 
   export default {
@@ -69,6 +74,29 @@
       },
       title() {
         return startCase(this.tab);
+      },
+    },
+    methods: {
+      ...mapActions(useStore, [
+        "generateFantasticSpecies",
+        "generateGroups",
+        "generateMarkov",
+      ]),
+      handleGenerator(option) {
+        const fields = {
+          fantasticSpecies: "species",
+          groups: "group",
+          markov: "name",
+        };
+
+        const field = fields[camelCase(this.tab)];
+        const value = option[fields[camelCase(this.tab)]];
+
+        this.config[camelCase(this.tab)][field] = value;
+
+        const storeAction = camelCase(`generate ${this.tab}`);
+
+        this[storeAction]();
       },
     },
   };

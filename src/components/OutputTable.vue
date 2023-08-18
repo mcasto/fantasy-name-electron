@@ -1,5 +1,8 @@
 <template>
   <q-toolbar>
+    <q-toolbar-title>
+      {{ title }}
+    </q-toolbar-title>
     <q-space></q-space>
     <q-btn icon="refresh" round flat @click="refresh"></q-btn>
   </q-toolbar>
@@ -17,12 +20,18 @@
 <script>
   import { useStore } from "stores/store";
   import { mapState } from "pinia";
-  import { camelCase } from "lodash";
+  import { camelCase, kebabCase } from "lodash";
 
   export default {
     props: ["section"],
     computed: {
-      ...mapState(useStore, ["output"]),
+      ...mapState(useStore, [
+        "config",
+        "fantasticSpecies",
+        "groups",
+        "markov",
+        "output",
+      ]),
       columns() {
         return this.sectionColumns[this.section];
       },
@@ -45,6 +54,34 @@
         }
 
         return retRows;
+      },
+      title() {
+        if (this.section == "fantasticSpecies") {
+          if (!this.fantasticSpecies) return "";
+          const species = this.config.fantasticSpecies.species;
+
+          const item = this.fantasticSpecies
+            .filter((rec) => rec.species == kebabCase(species))
+            .shift();
+
+          return item.name;
+        }
+
+        if (this.section == "groups") {
+          if (!this.groups) return "";
+          const group = this.config.groups.group;
+          const item = this.groups.filter((rec) => rec.group == group).shift();
+          return item.name;
+        }
+
+        if (this.section == "markov") {
+          if (!this.markov) return "";
+          const name = this.config.markov.name;
+          const item = this.markov.filter((rec) => rec.name == name).shift();
+          return item.title;
+        }
+
+        return "test";
       },
     },
     methods: {
