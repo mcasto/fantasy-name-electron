@@ -1,23 +1,26 @@
-import { random, sample, startCase } from "lodash";
+import { sample, startCase, isArray } from "lodash";
 
 export default async (db) => {
-  const rogues = (await db.findOne({ group: "thieves-and-assassins" })).data;
+  const rec = await db.findOne({
+    table: "groups",
+    group: "thieves-and-assassins",
+  });
 
-  let r = random(1, 30),
-    name;
+  const pattern = sample(rec.data.patterns);
+  const words = pattern.split(" ");
 
-  name =
-    r < 6
-      ? `${startCase(sample(rogues.roles))} of ${startCase(
-          sample(rogues.goals)
-        )}`
-      : r < 11
-      ? `${startCase(sample(rogues.adjectives))} ${startCase(
-          sample(rogues.actions)
-        )} ${startCase(sample(rogues.titles))}`
-      : `${startCase(sample(rogues.descriptions))} ${startCase(
-          sample(sample(rogues.groups))
-        )}`;
+  const output = words
+    .map((word) => {
+      if (!/[\{\}]/.test(word)) return word;
 
-  return name;
+      const fill = word.replace(/[{}]/g, "");
+      let retWord = sample(rec.data[fill]);
+
+      if (isArray(retWord)) retWord = sample(retWord);
+
+      return retWord;
+    })
+    .join(" ");
+
+  return startCase(output);
 };

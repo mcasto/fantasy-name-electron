@@ -8,3 +8,5 @@
 ✔ Tie all the minLength,maxLength,startsWith,endsWith,doesContain,doesNotContain, and order into the generation code @done(23-08-18 11:17)
 
 ☐ In Options, for Markov & Taverns, provide the ability to add/edit/delete the dictionaries
+
+☐ Update military & mystic groups to work more like thives and assassins (may be able to remove those secondary scripts)
