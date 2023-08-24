@@ -1,5 +1,9 @@
+import { camelCase, startCase } from "lodash";
+
 export default async (db) => {
-  return await db
-    .find({ table: "species", name: { $exists: true } })
-    .sort({ name: 1 });
+  const rec = await db.findOne({ table: "fantasticSpecies" }).sort({ name: 1 });
+  return Object.keys(rec.patterns).map((species) => ({
+    name: startCase(species),
+    id: camelCase(species),
+  }));
 };

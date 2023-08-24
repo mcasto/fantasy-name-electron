@@ -100,12 +100,12 @@ module.exports = {
   },
 
   generateWord: function ({
-    minLength,
-    maxLength,
-    startsWithString,
-    endsWithString,
-    doesContain,
-    doesNotContain,
+    minLength = 4,
+    maxLength = 11,
+    startsWithString = "",
+    endsWithString = "",
+    doesContain = "",
+    doesNotContain = "",
     maxAttempts = 1000,
   }) {
     let word = "",
@@ -128,16 +128,6 @@ module.exports = {
         nextNodeIndex = random(currentNode.neighbors.length);
         currentNode = currentNode.neighbors[nextNodeIndex];
       }
-
-      // if (
-      //   !startsWith(word, startsWithString) ||
-      //   !endsWith(word, endsWithString) ||
-      //   !word.includes(doesContain) ||
-      //   word.includes(doesNotContain) ||
-      //   word.length < minLength ||
-      //   word.length > maxLength
-      // )
-      //   word = "";
 
       if (
         word.substring(0, startsWithString.length) !== startsWithString ||

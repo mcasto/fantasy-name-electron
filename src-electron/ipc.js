@@ -8,7 +8,7 @@ import generateFantasyName from "./api/generate-fantasy-name";
 import generateTavern from "./api/generate-tavern";
 import getFantasticSpecies from "./api/get-fantastic-species";
 import getGroups from "./api/get-groups";
-import getMarkov from "./api/get-markov";
+import getMarkov from "./api/get-markovs";
 import initDatabase from "./api/init-database";
 
 import { join } from "path";

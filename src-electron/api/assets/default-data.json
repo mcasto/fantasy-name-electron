@@ -1,6 +1,6 @@
 [
   {
-    "table": "fantasy-names",
+    "table": "fantasyNames",
     "dictionary": [
       [
         "Aind",
@@ -9294,7 +9294,7 @@
         "count": 1
       },
       {
-        "value": "${ util.randomDictionary(dictionary) } ${ util.randomDictionary(dictionary) }",
+        "value": "<% const dict=[util.getSample(dictionary),util.getSample(dictionary)]; return `${dict.join(' ')}`; %>",
         "count": 1
       }
     ]
@@ -9867,16 +9867,7 @@
           "sudden"
         ],
         "groups": [
-          [
-            "blade",
-            "bolt",
-            "claw",
-            "dagger",
-            "dirk",
-            "fang",
-            "hand",
-            "knife"
-          ],
+          ["blade", "bolt", "claw", "dagger", "dirk", "fang", "hand", "knife"],
           [
             "balance",
             "hourglass",
@@ -9936,7 +9927,7 @@
       ],
       "militaryUnit": [
         {
-          "value": "<% const commanderName=commander.shift(); const group=util.getSample(dictionary.militaryUnit.groups); return `${commanderName}'s ${group}`; %>",
+          "value": "<% const commanderName=util.getCommander(util.commanderNames); const group=util.getSample(dictionary.militaryUnit.groups); return `${commanderName}'s ${group}`; %>",
           "count": 1
         },
         {
@@ -9969,8 +9960,8 @@
     }
   },
   {
-    "table": "markov",
-    "tables": {
+    "table": "markovs",
+    "dictionaries": {
       "egyptianDeities": [
         "aker",
         "ammit",
@@ -11409,7 +11400,7 @@
     }
   },
   {
-    "table": "species",
+    "table": "fantasticSpecies",
     "dictionary": {
       "vileAndCrude": {
         "small": [
@@ -11822,16 +11813,7 @@
           "yuh",
           "zham"
         ],
-        "suffixes": [
-          "doh",
-          "rei",
-          "mih",
-          "fah",
-          "soh",
-          "lah",
-          "tih",
-          "daoh"
-        ]
+        "suffixes": ["doh", "rei", "mih", "fah", "soh", "lah", "tih", "daoh"]
       },
       "doughty": {
         "syllables": [

@@ -18,7 +18,7 @@ export const useStore = defineStore("store", {
     config: {
       markov: {
         showSettings: true,
-        name: "ancient-greek-cities",
+        dictionary: "ancientGreekCities",
         num: 30,
         startsWithString: "",
         endsWithString: "",
@@ -32,11 +32,11 @@ export const useStore = defineStore("store", {
         num: 30,
       },
       fantasticSpecies: {
-        species: "altFemaleDarkElf",
+        species: "alterativeFemaleDarkElf",
         num: 30,
       },
       groups: {
-        group: "military-unit",
+        type: "militaryUnit",
         num: 30,
       },
       taverns: {
