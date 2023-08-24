@@ -1,4 +1,4 @@
-import { startCase } from "lodash";
+const { upperFirst, random, startsWith, endsWith } = require("lodash");
 
 function Node(char) {
   this.character = char;
@@ -51,7 +51,7 @@ let privateMethods = {
   start = new Node(""),
   map = {};
 
-export default {
+module.exports = {
   refresh: function () {
     order = 3;
     duplicates = new TrieNode();
@@ -99,42 +99,16 @@ export default {
     previous.neighbors.push(null);
   },
 
-  generateWord: function (
-    minLength = 4,
-    maxLength = 11,
-    startWith = "",
-    endWith = "",
-    contains = "",
-    doesntContains = "",
-    allowDuplicates = false,
-    maxAttempts
-  ) {
-    if (typeof startWith === "undefined") {
-      startWith = "";
-    }
-    if (typeof endWith === "undefined") {
-      endWith = "";
-    }
-    if (
-      typeof minLength === "undefined" ||
-      minLength < startWith.length ||
-      minLength < endWith.length
-    ) {
-      minLength =
-        startWith.length > endWith.length ? startWith.length : endWith.length;
-    }
-    if (typeof allowDuplicates === "undefined") {
-      allowDuplicates = false;
-    }
-    if (typeof maxLength === "undefined") {
-      maxLength = -1;
-    }
-    if (typeof maxAttempts === "undefined") {
-      maxAttempts = 100;
-    }
-
+  generateWord: function ({
+    minLength,
+    maxLength,
+    startsWithString,
+    endsWithString,
+    doesContain,
+    doesNotContain,
+    maxAttempts = 1000,
+  }) {
     let word = "",
-      repeat = true,
       attempts = 0,
       nextNodeIndex,
       currentNode;
@@ -145,33 +119,42 @@ export default {
         return;
       }
 
-      nextNodeIndex = Math.floor(Math.random() * start.neighbors.length);
+      nextNodeIndex = random(start.neighbors.length);
       currentNode = start.neighbors[nextNodeIndex];
       word = "";
 
       while (currentNode && (maxLength < 0 || word.length <= maxLength)) {
         word += currentNode.character;
-        nextNodeIndex = Math.floor(
-          Math.random() * currentNode.neighbors.length
-        );
+        nextNodeIndex = random(currentNode.neighbors.length);
         currentNode = currentNode.neighbors[nextNodeIndex];
       }
 
+      // if (
+      //   !startsWith(word, startsWithString) ||
+      //   !endsWith(word, endsWithString) ||
+      //   !word.includes(doesContain) ||
+      //   word.includes(doesNotContain) ||
+      //   word.length < minLength ||
+      //   word.length > maxLength
+      // )
+      //   word = "";
+
       if (
-        word.substr(0, startWith.length) !== startWith ||
-        word.substr(word.length - endWith.length) !== endWith ||
-        (typeof contains !== "undefined" && word.indexOf(contains) === -1) ||
-        (typeof doesntContains !== "undefined" &&
-          doesntContains.length > 0 &&
-          word.indexOf(doesntContains) > -1) ||
+        word.substring(0, startsWithString.length) !== startsWithString ||
+        word.substring(word.length - endsWithString.length) !==
+          endsWithString ||
+        (typeof doesContain !== "undefined" &&
+          word.indexOf(doesContain) === -1) ||
+        (typeof doesNotContain !== "undefined" &&
+          doesNotContain.length > 0 &&
+          word.indexOf(doesNotContain) > -1) ||
         word.length > maxLength ||
-        word.length < minLength ||
-        (!allowDuplicates && privateMethods.isDuplicate(word, duplicates))
+        word.length < minLength
       ) {
         word = "";
       }
     }
 
-    return startCase(word);
+    return upperFirst(word);
   },
 };
